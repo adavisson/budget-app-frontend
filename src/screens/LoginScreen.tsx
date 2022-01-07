@@ -3,16 +3,22 @@ import {
   Keyboard,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+import loginApi from '../util/api/login';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [token, setToken] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const loginHandler = () => {};
+  const loginHandler = () => {
+    loginApi.login(email, password).then(resp => setToken(resp.token));
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -26,6 +32,7 @@ export const LoginScreen = () => {
           underlineColor='#7F39FB'
           onChangeText={text => setEmail(text)}
           autoComplete={false}
+          autoCapitalize='none'
         />
         <TextInput
           value={password}
@@ -33,10 +40,16 @@ export const LoginScreen = () => {
           label='Password'
           style={styles.input}
           underlineColor='#7F39FB'
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           onChangeText={text => setPassword(text)}
           autoComplete={false}
         />
+        <TouchableOpacity
+          style={styles.showPasswordText}
+          onPress={() => setShowPassword(!showPassword)}
+        >
+          <Text>{showPassword ? 'Hide Password' : 'Show Password'}</Text>
+        </TouchableOpacity>
         <Button
           mode='contained'
           style={styles.button}
@@ -45,6 +58,7 @@ export const LoginScreen = () => {
         >
           LOG IN
         </Button>
+        {token ? <Text>{token}</Text> : null}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -74,5 +88,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#03DAC5',
+  },
+  showPasswordText: {
+    marginTop: 20,
   },
 });
