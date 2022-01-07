@@ -1494,11 +1494,6 @@
   resolved "http://localhost:4873/@types%2fprop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
-"@types/react-native-dotenv@^0.2.0":
-  version "0.2.0"
-  resolved "http://localhost:4873/@types%2freact-native-dotenv/-/react-native-dotenv-0.2.0.tgz#32c58422a422c1adf68acce363ed791314d5a8e7"
-  integrity sha512-ZxX+dU/yoQc0jTk+/NWttkiuXceJyN5FpOSqDl0WynN5GDzxwH7OMruQ47qcY8llo2RD3irjvzJ9BwC8gDiq0A==
-
 "@types/react-native@~0.64.12":
   version "0.64.21"
   resolved "http://localhost:4873/@types%2freact-native/-/react-native-0.64.21.tgz#f45aaac377ae2b2195e03597d4fd9fe366b2fcb5"
@@ -2580,6 +2575,11 @@ expo-modules-core@0.6.4:
   dependencies:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
+
+expo-secure-store@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-11.1.0.tgz#2eb6e793a459e178feeb72bbeb40afc97e412bf6"
+  integrity sha512-LyCLqsoibP90Td4mSWc+un+xGNYnIuGOrfbp2aG2KAn1ZGcDL6muxIaFj7a/4Kh+EiCIoU5EPb1YjOATbmaBnQ==
 
 expo-status-bar@~1.2.0:
   version "1.2.0"

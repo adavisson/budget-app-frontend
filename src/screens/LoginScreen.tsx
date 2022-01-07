@@ -9,15 +9,29 @@ import {
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import loginApi from '../util/api/login';
+import * as SecureStore from 'expo-secure-store';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { HomeScreen } from './HomeScreen';
 
-export const LoginScreen = () => {
+interface ILoginScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
+
+export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [token, setToken] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const loginHandler = () => {
-    loginApi.login(email, password).then(resp => setToken(resp.token));
+  const storeToken = async (token: string) => {
+    return SecureStore.setItemAsync('authToken', token);
+  };
+
+  const loginHandler = async () => {
+    const response = await loginApi.login(email, password);
+    await storeToken(response.token);
+    return navigation.navigate('Home', {
+      userId: response.user_id,
+    });
   };
 
   return (
@@ -58,7 +72,6 @@ export const LoginScreen = () => {
         >
           LOG IN
         </Button>
-        {token ? <Text>{token}</Text> : null}
       </View>
     </TouchableWithoutFeedback>
   );

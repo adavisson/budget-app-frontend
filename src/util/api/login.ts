@@ -4,7 +4,7 @@ type loginApiType = {
   login: (
     email: string,
     password: string,
-  ) => Promise<{ userId: number; token: string }>;
+  ) => Promise<{ user_id: number; token: string }>;
 };
 
 const loginApi: loginApiType = {

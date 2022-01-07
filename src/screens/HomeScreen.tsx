@@ -1,20 +1,27 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import { RouteProp } from '@react-navigation/native';
 
 interface IHomeScreenProps {
   navigation: NativeStackNavigationProp<any>;
+  route: RouteProp<{ params: { userId: number } }>;
 }
 
-export const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation }) => {
+export const HomeScreen: React.FC<IHomeScreenProps> = ({
+  navigation,
+  route,
+}) => {
+  const { userId } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>Test</Text>
-      <StatusBar style='auto' />
-      <View style={styles.loginButton}>
-        <Button title='Login' onPress={() => navigation.navigate('Login')} />
-      </View>
+      <Text>Welcome Home Andrew!</Text>
+      <Text>{userId}</Text>
     </View>
   );
 };
