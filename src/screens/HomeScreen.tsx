@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableOpacityBase,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
@@ -30,7 +24,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
   const { userId } = route.params;
   const [user, setUser] = useState<userType | null>(null);
 
-  const logout = () => {
+  const logout = async () => {
     return SecureStore.deleteItemAsync('authToken').then(() => {
       navigation.navigate('Login');
     });

@@ -58,12 +58,12 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           autoComplete={false}
         />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.showPasswordText}
           onPress={() => setShowPassword(!showPassword)}
         >
           <Text>{showPassword ? 'Hide Password' : 'Show Password'}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <Button
           mode='contained'
           style={styles.button}
@@ -72,6 +72,12 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
         >
           LOG IN
         </Button>
+        <TouchableOpacity
+          style={styles.signUp}
+          onPress={() => navigation.navigate('Sign Up')}
+        >
+          <Text style={styles.text}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -104,5 +110,11 @@ const styles = StyleSheet.create({
   },
   showPasswordText: {
     marginTop: 20,
+  },
+  text: {
+    color: '#7F39FB',
+  },
+  signUp: {
+    marginTop: 10,
   },
 });
