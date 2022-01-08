@@ -16,6 +16,7 @@ type userType = {
   email: string;
   first_name: string;
   last_name: string;
+  budget: any;
 };
 
 export const HomeScreen: React.FC<IHomeScreenProps> = ({
@@ -31,6 +32,10 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
     });
   };
 
+  const handleCreateBudget = async () => {
+    navigation.navigate('Create Budget', { userId });
+  };
+
   useEffect(() => {
     homeApi
       .index(userId)
@@ -40,18 +45,32 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
       });
   }, []);
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <Button
         style={styles.logoutButton}
-        mode='contained'
         labelStyle={styles.logoutButtonText}
         onPress={logout}
       >
-        LOG OUT{' '}
+        LOG OUT
       </Button>
       <Text style={styles.headerText}>Welcome {user?.first_name}!</Text>
-      <BudgetOverview />
+      {user.budget ? (
+        <BudgetOverview />
+      ) : (
+        <Button
+          style={styles.createBudgetButton}
+          mode='contained'
+          labelStyle={styles.createButtonText}
+          onPress={handleCreateBudget}
+        >
+          CREATE A BUDGET
+        </Button>
+      )}
     </View>
   );
 };
@@ -71,11 +90,15 @@ const styles = StyleSheet.create({
   logoutButton: {
     position: 'absolute',
     top: 75,
-    left: 30,
-
-    // backgroundColor: '#7F39FB',
+    left: 20,
+  },
+  createBudgetButton: {
+    marginTop: 40,
+  },
+  createButtonText: {
+    color: '#03DAC5',
   },
   logoutButtonText: {
-    color: '#03DAC5',
+    color: '#7F39FB',
   },
 });
