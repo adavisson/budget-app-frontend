@@ -1,10 +1,12 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import {
+  Text,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  TouchableOpacity,
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import signupApi from '../util/api/signup';
@@ -28,31 +30,37 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
       value: email,
       label: 'email',
       setter: setEmail,
+      secure: false,
     },
     {
       value: emailConfirmation,
       label: 'email confirmation',
       setter: setEmailConfirmation,
+      secure: false,
     },
     {
       value: firstName,
       label: 'first name',
       setter: setFirstName,
+      secure: false,
     },
     {
       value: lastName,
       label: 'last name',
       setter: setLastName,
+      secure: false,
     },
     {
       value: password,
       label: 'password',
       setter: setPassword,
+      secure: true,
     },
     {
       value: passwordConfirmation,
       label: 'password confirmation',
       setter: setPasswordConfirmation,
+      secure: true,
     },
   ];
 
@@ -63,6 +71,12 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
       setStep(step + 1);
     } else if (step === 5) {
       submitUser();
+    }
+  };
+
+  const handleBackButtonPress = () => {
+    if (step > 0) {
+      setStep(step - 1);
     }
   };
 
@@ -92,6 +106,7 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
           onChangeText={text => steps[step].setter(text)}
           autoComplete={false}
           autoCapitalize='none'
+          secureTextEntry={steps[step].secure}
         />
         <Button
           mode='contained'
@@ -101,6 +116,11 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
         >
           {getButtonText()}
         </Button>
+        {step > 0 ? (
+          <TouchableOpacity onPress={handleBackButtonPress}>
+            <Text style={styles.backButton}>{'<- Back'}</Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -115,11 +135,15 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 40,
+    marginBottom: 20,
     width: 150,
     margin: 10,
   },
   buttonText: {
     color: '#03DAC5',
+  },
+  backButton: {
+    color: '#7F39FB',
   },
   input: {
     marginTop: '55%',
