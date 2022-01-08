@@ -5,6 +5,7 @@ import { RouteProp } from '@react-navigation/native';
 import homeApi from '../util/api/home';
 import { Button } from 'react-native-paper';
 import tokenService from '../util/tokenService';
+import { BudgetOverview } from '../components/BudgetOverview';
 
 interface IHomeScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -50,6 +51,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
         LOG OUT{' '}
       </Button>
       <Text style={styles.headerText}>Welcome {user?.first_name}!</Text>
+      <BudgetOverview />
     </View>
   );
 };
@@ -60,9 +62,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#03DAC5',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   headerText: {
+    marginTop: '45%',
     fontSize: 24,
     color: '#7F39FB',
   },
