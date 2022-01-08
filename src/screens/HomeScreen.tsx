@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
-import * as SecureStore from 'expo-secure-store';
 import homeApi from '../util/api/home';
 import { Button } from 'react-native-paper';
+import tokenService from '../util/tokenService';
 
 interface IHomeScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -25,7 +25,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
   const [user, setUser] = useState<userType | null>(null);
 
   const logout = async () => {
-    return SecureStore.deleteItemAsync('authToken').then(() => {
+    return tokenService.logout().then(() => {
       navigation.navigate('Login');
     });
   };

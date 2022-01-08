@@ -1,3 +1,4 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import {
   View,
@@ -6,10 +7,14 @@ import {
   Keyboard,
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+import signupApi from '../util/api/signup';
+import tokenService from '../util/tokenService';
 
-interface ISignUpScreenProps {}
+interface ISignUpScreenProps {
+  navigation: NativeStackNavigationProp<any>;
+}
 
-export const SignUpScreen: React.FC<ISignUpScreenProps> = () => {
+export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [emailConfirmation, setEmailConfirmation] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
@@ -56,7 +61,23 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = () => {
   const handleButtonPress = () => {
     if (step < 5) {
       setStep(step + 1);
+    } else if (step === 5) {
+      submitUser();
     }
+  };
+
+  const submitUser = async () => {
+    const response = await signupApi.signup(
+      email,
+      firstName,
+      lastName,
+      password,
+      passwordConfirmation,
+    );
+    await tokenService.storeToken(response.token);
+    return navigation.navigate('Home', {
+      userId: response.user_id,
+    });
   };
 
   return (

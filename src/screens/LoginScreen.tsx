@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import loginApi from '../util/api/login';
-import * as SecureStore from 'expo-secure-store';
+import tokenService from '../util/tokenService';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeScreen } from './HomeScreen';
 
 interface ILoginScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -22,13 +21,9 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const storeToken = async (token: string) => {
-    return SecureStore.setItemAsync('authToken', token);
-  };
-
   const loginHandler = async () => {
     const response = await loginApi.login(email, password);
-    await storeToken(response.token);
+    await tokenService.storeToken(response.token);
     return navigation.navigate('Home', {
       userId: response.user_id,
     });
