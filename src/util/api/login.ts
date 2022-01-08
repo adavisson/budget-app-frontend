@@ -11,10 +11,8 @@ const loginApi: loginApiType = {
   login: (email: string, password: string) =>
     apiService
       .post('/login', { email, password })
-      .then(res => {
-        return res.data;
-      })
-      .catch(err => console.log(err)),
+      .then(res => res.data)
+      .catch(err => console.error(err)),
 };
 
 export default loginApi;
