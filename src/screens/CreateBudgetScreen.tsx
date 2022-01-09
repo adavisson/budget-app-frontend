@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+import budgetApi from '../util/api/budget';
 
 interface ICreateBudgetScreenProps {
   navigation: NativeStackNavigationProp<any>;
@@ -20,7 +21,11 @@ export const CreateBudgetScreen: React.FC<ICreateBudgetScreenProps> = ({
     navigation.navigate('Home', { userId });
   };
 
-  const handleButtonPress = () => {};
+  const handleButtonPress = () => {
+    budgetApi
+      .create(userId, parseInt(income))
+      .then(() => navigation.navigate('Home', { userId }));
+  };
 
   return (
     <View style={styles.createBudgetView}>

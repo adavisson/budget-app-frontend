@@ -60,7 +60,8 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
       </Button>
       <Text style={styles.headerText}>Welcome {user?.first_name}!</Text>
       {user.budget ? (
-        <BudgetOverview />
+        // <BudgetOverview />
+        <Text>{user.budget.income}</Text>
       ) : (
         <Button
           style={styles.createBudgetButton}
