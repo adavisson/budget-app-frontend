@@ -64,7 +64,7 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
     },
   ];
 
-  const getButtonText = () => (step < 5 ? 'Next' : 'Submit');
+  const getButtonText = () => (step < 5 ? 'NEXT' : 'SUBMIT');
 
   const handleButtonPress = () => {
     if (step < 5) {
@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#03DAC5',
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   button: {
     marginTop: 40,
