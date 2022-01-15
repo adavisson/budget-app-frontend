@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+import categoryApi from '../util/api/category';
 
 interface IAddCategoryProps {
   navigation: NativeStackNavigationProp<any>;
@@ -35,11 +36,18 @@ export const AddCategoryScreen: React.FC<IAddCategoryProps> = ({
     navigation.navigate('Home', { userId });
   };
 
+  const handleSubmit = () => {
+    categoryApi
+      .create(userId, name, color)
+      .then(data => console.log(data))
+      .then(() => navigation.navigate('Home', { userId }));
+  };
+
   const handleButtonPress = () => {
     if (step < 1) {
       setStep(step + 1);
     } else if (step === 1) {
-      //submit
+      handleSubmit();
     }
   };
 
