@@ -1,5 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AddBillScreen } from './src/screens/AddBillScreen';
+import { AddCategoryScreen } from './src/screens/AddCategoryScreen';
 import { CreateBudgetScreen } from './src/screens/CreateBudgetScreen';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { LoginScreen } from './src/screens/LoginScreen';
@@ -30,6 +32,16 @@ export default function App() {
           name='Create Budget'
           component={CreateBudgetScreen}
           options={{ title: 'Create Budget' }}
+        />
+        <Stack.Screen
+          name='Add Bill'
+          component={AddBillScreen}
+          options={{ title: 'Add Bill' }}
+        />
+        <Stack.Screen
+          name='Add Category'
+          component={AddCategoryScreen}
+          options={{ title: 'Add Category' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

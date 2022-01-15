@@ -32,8 +32,8 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
     });
   };
 
-  const handleCreateBudget = async () => {
-    navigation.navigate('Create Budget', { userId });
+  const handleButtonPress = async (screen: string) => {
+    navigation.navigate(screen, { userId });
   };
 
   useEffect(() => {
@@ -68,17 +68,23 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
             style={styles.button}
             mode='contained'
             labelStyle={styles.buttonText}
+            onPress={() => handleButtonPress('Add Bill')}
           >
             ADD BILL
           </Button>
-          <Button style={styles.categoryButton}>ADD CATEGORY</Button>
+          <Button
+            style={styles.categoryButton}
+            onPress={() => handleButtonPress('Add Category')}
+          >
+            ADD CATEGORY
+          </Button>
         </View>
       ) : (
         <Button
           style={styles.createBudgetButton}
           mode='contained'
           labelStyle={styles.buttonText}
-          onPress={handleCreateBudget}
+          onPress={() => handleButtonPress('Create Budget')}
         >
           CREATE A BUDGET
         </Button>
