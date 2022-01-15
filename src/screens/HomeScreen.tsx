@@ -25,6 +25,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
 }) => {
   const { userId } = route.params;
   const [user, setUser] = useState<userType | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const logout = async () => {
     return tokenService.logout().then(() => {
@@ -37,9 +38,13 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
   };
 
   useEffect(() => {
+    setLoading(true);
     homeApi
       .index(userId)
-      .then(data => setUser(data))
+      .then(data => {
+        setUser(data);
+        setLoading(false);
+      })
       .catch(() => {
         return navigation.navigate('Login');
       });
@@ -51,6 +56,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
 
   return (
     <View style={styles.container}>
+      {loading ? <Text style={styles.loadingText}>Loading...</Text> : null}
       <Button
         style={styles.logoutButton}
         labelStyle={styles.logoutButtonText}
@@ -125,5 +131,10 @@ const styles = StyleSheet.create({
   categoryButton: {
     position: 'absolute',
     bottom: 35,
+  },
+  loadingText: {
+    color: '#7F39FB',
+    position: 'absolute',
+    top: 50,
   },
 });
