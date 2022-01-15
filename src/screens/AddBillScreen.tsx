@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-interface IAddCategoryProps {}
+interface IAddBillProps {}
 
-export const AddCategory: React.FC<IAddCategoryProps> = () => {
+export const AddBillScreen: React.FC<IAddBillProps> = () => {
   return (
     <View style={styles.container}>
-      <Text>ADD CATEGORY</Text>
+      <Text>ADD BILL</Text>
     </View>
   );
 };
