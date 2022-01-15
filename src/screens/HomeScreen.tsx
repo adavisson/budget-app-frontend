@@ -56,16 +56,28 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
         labelStyle={styles.logoutButtonText}
         onPress={logout}
       >
-        LOG OUT
+        {`< LOG OUT`}
       </Button>
-      <Text style={styles.headerText}>Welcome {user?.first_name}!</Text>
+      <Text style={styles.headerText}>
+        WELCOME {user?.first_name.toUpperCase()}
+      </Text>
       {user.budget ? (
-        <BudgetOverview />
+        <View style={styles.container}>
+          <BudgetOverview />
+          <Button
+            style={styles.button}
+            mode='contained'
+            labelStyle={styles.buttonText}
+          >
+            ADD BILL
+          </Button>
+          <Button style={styles.categoryButton}>ADD CATEGORY</Button>
+        </View>
       ) : (
         <Button
           style={styles.createBudgetButton}
           mode='contained'
-          labelStyle={styles.createButtonText}
+          labelStyle={styles.buttonText}
           onPress={handleCreateBudget}
         >
           CREATE A BUDGET
@@ -95,10 +107,17 @@ const styles = StyleSheet.create({
   createBudgetButton: {
     marginTop: 40,
   },
-  createButtonText: {
+  buttonText: {
     color: '#03DAC5',
   },
   logoutButtonText: {
     color: '#7F39FB',
+  },
+  button: {
+    marginTop: 15,
+  },
+  categoryButton: {
+    position: 'absolute',
+    bottom: 35,
   },
 });
