@@ -55,6 +55,12 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
           secureTextEntry={!showPassword}
           onChangeText={text => setPassword(text)}
           autoComplete={false}
+          right={
+            <TextInput.Icon
+              name={!showPassword ? 'eye' : 'eye-off'}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          }
         />
         {/* <TouchableOpacity
           style={styles.showPasswordText}
