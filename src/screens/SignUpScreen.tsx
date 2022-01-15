@@ -106,7 +106,7 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
           labelStyle={styles.goBackButtonText}
           onPress={goBack}
         >
-          {`< LOGIN`}
+          {`<- LOGIN`}
         </Button>
         <TextInput
           value={steps[step].value}

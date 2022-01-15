@@ -56,7 +56,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
         labelStyle={styles.logoutButtonText}
         onPress={logout}
       >
-        {`< LOG OUT`}
+        {`<- LOG OUT`}
       </Button>
       <Text style={styles.headerText}>
         WELCOME {user?.first_name.toUpperCase()}

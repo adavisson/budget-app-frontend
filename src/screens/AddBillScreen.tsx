@@ -26,7 +26,7 @@ export const AddBillScreen: React.FC<IAddBillProps> = ({
         labelStyle={styles.backButtonText}
         onPress={goBack}
       >
-        {`< HOME`}
+        {`<- HOME`}
       </Button>
       <Text style={styles.headerText}>ADD BILL</Text>
     </View>

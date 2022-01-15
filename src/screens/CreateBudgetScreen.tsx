@@ -34,7 +34,7 @@ export const CreateBudgetScreen: React.FC<ICreateBudgetScreenProps> = ({
         labelStyle={styles.homeButtonText}
         onPress={goHome}
       >
-        {'< Home'}
+        {'<- Home'}
       </Button>
       <TextInput
         value={income}
