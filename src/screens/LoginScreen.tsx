@@ -20,8 +20,10 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const loginHandler = async () => {
+    setLoading(true);
     const response = await loginApi.login(email, password);
     await tokenService.storeToken(response.token);
     return navigation.navigate('Home', {
@@ -65,7 +67,7 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
           labelStyle={styles.buttonText}
           onPress={loginHandler}
         >
-          LOG IN
+          {!loading ? 'LOG IN' : 'SIGNING IN...'}
         </Button>
         <TouchableOpacity
           style={styles.signUp}
