@@ -80,6 +80,10 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
     }
   };
 
+  const goBack = () => {
+    navigation.navigate('Login');
+  };
+
   const submitUser = async () => {
     const response = await signupApi.signup(
       email,
@@ -97,6 +101,13 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.signUpView}>
+        <Button
+          style={styles.goBackButton}
+          labelStyle={styles.goBackButtonText}
+          onPress={goBack}
+        >
+          {`< LOGIN`}
+        </Button>
         <TextInput
           value={steps[step].value}
           mode='flat'
@@ -148,6 +159,14 @@ const styles = StyleSheet.create({
     marginTop: '55%',
     width: '75%',
     backgroundColor: 'transparent',
+    color: '#7F39FB',
+  },
+  goBackButton: {
+    position: 'absolute',
+    top: 75,
+    left: 20,
+  },
+  goBackButtonText: {
     color: '#7F39FB',
   },
 });
