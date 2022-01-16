@@ -24,6 +24,7 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
   const [step, setStep] = useState<number>(0);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const steps = [
     {
@@ -117,7 +118,15 @@ export const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
           onChangeText={text => steps[step].setter(text)}
           autoComplete={false}
           autoCapitalize='none'
-          secureTextEntry={steps[step].secure}
+          secureTextEntry={steps[step].secure ? !showPassword : false}
+          right={
+            steps[step].secure ? (
+              <TextInput.Icon
+                name={!showPassword ? 'eye' : 'eye-off'}
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            ) : null
+          }
         />
         <Button
           mode='contained'
