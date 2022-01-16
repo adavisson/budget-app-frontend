@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '75%',
     marginTop: '55%',
+    alignItems: 'center',
   },
   input: {
     marginTop: 20,
