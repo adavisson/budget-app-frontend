@@ -17,6 +17,7 @@ type userType = {
   first_name: string;
   last_name: string;
   budget: any;
+  categories: Array<any>;
 };
 
 export const HomeScreen: React.FC<IHomeScreenProps> = ({
@@ -34,7 +35,7 @@ export const HomeScreen: React.FC<IHomeScreenProps> = ({
   };
 
   const handleButtonPress = async (screen: string) => {
-    navigation.navigate(screen, { userId });
+    navigation.navigate(screen, { userId, categories: user?.categories || [] });
   };
 
   useEffect(() => {

@@ -1,7 +1,14 @@
 import { RouteProp } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import categoryApi from '../util/api/category';
 
@@ -60,38 +67,40 @@ export const AddCategoryScreen: React.FC<IAddCategoryProps> = ({
   const getButtonText = () => (step < 1 ? 'NEXT' : 'SUBMIT');
 
   return (
-    <View style={styles.container}>
-      <Button
-        style={styles.goBackButton}
-        labelStyle={styles.goBackButtonText}
-        onPress={goBack}
-      >
-        {`<- HOME`}
-      </Button>
-      <TextInput
-        value={steps[step].value}
-        mode='flat'
-        label={steps[step].label}
-        style={styles.input}
-        underlineColor='#7F39FB'
-        onChangeText={value => steps[step].setter(value)}
-        autoComplete={false}
-        autoCapitalize='none'
-      />
-      <Button
-        mode='contained'
-        style={styles.button}
-        labelStyle={styles.buttonText}
-        onPress={handleButtonPress}
-      >
-        {getButtonText()}
-      </Button>
-      {step > 0 ? (
-        <TouchableOpacity onPress={handleBackButtonPress}>
-          <Text style={styles.backButton}>{'<- Back'}</Text>
-        </TouchableOpacity>
-      ) : null}
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Button
+          style={styles.goBackButton}
+          labelStyle={styles.goBackButtonText}
+          onPress={goBack}
+        >
+          {`<- HOME`}
+        </Button>
+        <TextInput
+          value={steps[step].value}
+          mode='flat'
+          label={steps[step].label}
+          style={styles.input}
+          underlineColor='#7F39FB'
+          onChangeText={value => steps[step].setter(value)}
+          autoComplete={false}
+          autoCapitalize='none'
+        />
+        <Button
+          mode='contained'
+          style={styles.button}
+          labelStyle={styles.buttonText}
+          onPress={handleButtonPress}
+        >
+          {getButtonText()}
+        </Button>
+        {step > 0 ? (
+          <TouchableOpacity onPress={handleBackButtonPress}>
+            <Text style={styles.backButton}>{'<- Back'}</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
