@@ -25,6 +25,9 @@ export const LoginScreen: React.FC<ILoginScreenProps> = ({ navigation }) => {
   const loginHandler = async () => {
     setLoading(true);
     const response = await loginApi.login(email, password);
+    if (!response) {
+      setLoading(false);
+    }
     await tokenService.storeToken(response.token);
     navigation.navigate('Home', {
       userId: response.user_id,
